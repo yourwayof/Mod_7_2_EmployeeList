@@ -2,6 +2,7 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.util.*;
 import java.util.stream.Stream;
 
@@ -15,8 +16,10 @@ public class Main
         ArrayList<Employee> staff = loadStaffFromFile();
 
         Calendar calendar = Calendar.getInstance();
-        staff.stream().filter(e1 -> e1.getWorkStart().getYear() == 117).forEach(System.out::println);
-
+        staff.stream()
+                .filter(e1 -> e1.getCorrectDateWorkStart().getYear() == 2017)
+                .max(Comparator.comparing(Employee::getSalary))
+                .ifPresent(System.out::println);
     }
 
 
